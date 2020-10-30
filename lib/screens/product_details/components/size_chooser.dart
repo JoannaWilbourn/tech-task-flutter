@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:one_iota_tech_task/models/product.dart';
 
@@ -27,7 +26,7 @@ class _SizeChooserState extends State<SizeChooser> {
         onPressed: () {
           showModalBottomSheet(
             context: context,
-            builder: (modalContext) {
+            builder: (context) {
               return StatefulBuilder(
                   builder: (BuildContext context, StateSetter modalState) {
                 return Column(mainAxisSize: MainAxisSize.min, children: [
@@ -39,21 +38,20 @@ class _SizeChooserState extends State<SizeChooser> {
                               padding: EdgeInsets.only(left: 20))),
                       Align(
                           child: IconButton(
-                            icon: Icon(Icons.close),
+                            icon: Icon(Icons.close, semanticLabel: "Close size chooser",),
                             onPressed: () => Navigator.pop(context),
                           ),
                           alignment: Alignment.centerRight)
                     ],
                   ),
-                  Container(
-                      padding: EdgeInsets.all(20),
+                   Container(
+                      padding: EdgeInsets.all(10),
                       child: GridView.builder(
                           shrinkWrap: true,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 6,
-                            mainAxisSpacing: 10,
-                            crossAxisSpacing: 10,
+                          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                              maxCrossAxisExtent: 60,
+                              mainAxisSpacing: 10,
+                              crossAxisSpacing: 10
                           ),
                           itemCount: widget.product.sizes.length,
                           itemBuilder: (context, index) {
@@ -65,7 +63,7 @@ class _SizeChooserState extends State<SizeChooser> {
                                     _changeSelectedSize(size);
                                   });
                                 },
-                                child: Text(size),
+                                child: Text(size, style: TextStyle(fontSize: 16)),
                                 color: Colors.blue,
                                 textColor: Colors.white,
                               );
@@ -76,7 +74,7 @@ class _SizeChooserState extends State<SizeChooser> {
                                       _changeSelectedSize(size);
                                     });
                                   },
-                                  child: Text(size));
+                                  child: Text(size, style: TextStyle(fontSize: 16)));
                             }
                           })),
                   Row(children: [
@@ -90,6 +88,7 @@ class _SizeChooserState extends State<SizeChooser> {
                                     .showSnackBar(SnackBar(
                                   content: Text("Added to bag"),
                                   behavior: SnackBarBehavior.floating,
+                                  backgroundColor: Theme.of(context).primaryColor,
                                 ));
                               },
                               child: Text('ADD TO BAG'),

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:one_iota_tech_task/screens/product_details/product_details.dart';
 import 'package:one_iota_tech_task/screens/product_highlights/product_highlights.dart';

@@ -14,7 +14,8 @@ Future<List<Product>> fetchProducts() async {
 }
 
 List<Product> parseProducts(List<int> responseBody) {
-  final parsed = json.decode(utf8.decode(responseBody))['data']
+  final parsed = json
+      .decode(utf8.decode(responseBody))['data']
       .cast<Map<String, dynamic>>();
   return parsed.map<Product>((json) => Product.fromJson(json)).toList();
 }

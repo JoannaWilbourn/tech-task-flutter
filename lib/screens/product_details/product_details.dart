@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:one_iota_tech_task/models/product.dart';
 
@@ -13,79 +12,39 @@ class ProductDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(),
-        body: Stack(
-          children: [
+        body: OrientationBuilder(builder: (context, orientation) {
+          return Stack(children: [
             ListView(
-              padding: EdgeInsets.only(
-                  bottom: 80),
+              padding: EdgeInsets.only(bottom: 80),
               children: [
-                Row(
-                  children: [
-                    Container(
-                        padding: const EdgeInsets.all(20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  product.name.toUpperCase(),
-                                  softWrap: true,
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  ),
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text(product.price(),
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    )),
-                              ],
-                            ),
-                          ],
-                        ))
-                  ],
-                ),
-                Divider(color: Colors.grey),
                 Container(
-                  padding: const EdgeInsets.all(20),
-                  child: Image.network(
-                    product.mainImage,
+                  padding: EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        product.name.toUpperCase(),
+                        softWrap: true,
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(product.price(),
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          )),
+                    ],
                   ),
                 ),
+                Divider(thickness: 1),
                 Container(
-                  padding: const EdgeInsets.all(20),
-                  child: Text(
-                    product.description,
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.only(left: 20, bottom: 5),
-                  child: Text(
-                    'BRAND: ' + product.brandName.toUpperCase(),
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.only(left: 20, bottom: 5),
-                  child: Text(
-                    'COLOUR: ' + product.colour.toUpperCase(),
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
+                    padding: const EdgeInsets.only(left: 20, right: 20),
+                    child: (orientation == Orientation.portrait
+                        ? _portraitProductDetails(product: product)
+                        : _landscapeProductDetails(product: product)))
               ],
             ),
             Positioned(
@@ -98,7 +57,78 @@ class ProductDetailsScreen extends StatelessWidget {
                     product: product,
                   ),
                 ))
-          ],
-        ));
+          ]);
+        }));
+  }
+
+  _landscapeProductDetails({Product product}) {
+    return Row(children: [
+      Expanded(
+          flex: 1,
+          child: Image.network(
+            product.mainImage,
+            semanticLabel: "Image of " + product.name,
+          )),
+      Expanded(
+          flex: 1,
+          child: Container(
+              padding: const EdgeInsets.only(left: 20, right: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                    padding: const EdgeInsets.only(top: 20, bottom: 20),
+                    child: Text(
+                      product.description,
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    )),
+                Text(
+                  'COLOUR: ' + product.colour.toUpperCase(),
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+                Text(
+                  'BRAND: ' + product.brandName.toUpperCase(),
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            )
+                  )
+      )
+    ]);
+  }
+
+  _portraitProductDetails({Product product}) {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Image.network(
+        product.mainImage,
+        semanticLabel: "Image of " + product.name,
+      ),
+      Container(
+          padding: const EdgeInsets.only(top: 20, bottom: 20),
+          child: Text(
+            product.description,
+            style: TextStyle(
+              fontSize: 16,
+            ),
+          )),
+      Text(
+        'BRAND: ' + product.brandName.toUpperCase(),
+        style: TextStyle(
+          fontSize: 16,
+        ),
+      ),
+      Text(
+        'COLOUR: ' + product.colour.toUpperCase(),
+        style: TextStyle(
+          fontSize: 16,
+        ),
+      ),
+    ]);
   }
 }
