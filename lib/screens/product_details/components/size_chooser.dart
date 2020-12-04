@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:one_iota_tech_task/models/product.dart';
+import '../../../models/product.dart';
 
 class SizeChooser extends StatefulWidget {
   final Product product;

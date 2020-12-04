@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:one_iota_tech_task/screens/product_details/product_details.dart';
-import 'package:one_iota_tech_task/screens/product_highlights/product_highlights.dart';
-import 'package:one_iota_tech_task/services/products_list.dart';
+import 'screens/product_details/product_details.dart';
+import 'screens/product_highlights/product_highlights.dart';
+import 'services/products_list.dart';
 
 import 'models/product.dart';
 
@@ -55,7 +55,6 @@ class _ShoeShopAppState extends State<ShoeShopApp> {
               return false;
             }
 
-            // Update the list of pages by setting _selectedBook to null
             setState(() {
               _selectedProduct = null;
             });

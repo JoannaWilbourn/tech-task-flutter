@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:one_iota_tech_task/screens/product_highlights/product_summary_grid.dart';
+import 'product_summary_grid.dart';
 
 import '../../models/product.dart';
 

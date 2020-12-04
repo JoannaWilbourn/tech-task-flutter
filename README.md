@@ -1,6 +1,6 @@
-# one_iota_tech_task
+# tech_task_flutter
 
-Angular tech task in Flutter.
+Technical task reimplmented in flutter
 
 ## Getting Started
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:one_iota_tech_task/models/product.dart';
+import '../../models/product.dart';
 
 import 'components/size_chooser.dart';
 
