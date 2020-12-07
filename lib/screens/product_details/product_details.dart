@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 import 'package:tech_task_flutter/models/product.dart';
 import 'package:tech_task_flutter/screens/product_details/components/size_chooser.dart';
+import 'package:tech_task_flutter/global_store.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
   final Product product;
@@ -9,8 +12,9 @@ class ProductDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Config configStore = Provider.of<Config>(context);
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar( title:  Observer(builder: (_) { return Text(configStore.productHighlight); })),
         body: OrientationBuilder(builder: (context, orientation) {
           return Stack(children: [
             ListView(
